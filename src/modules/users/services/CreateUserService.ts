@@ -10,7 +10,6 @@ interface IRequest {
   name: string;
   email: string;
   password: string;
-  passwordConfirmation: string;
 }
 
 @injectable()
@@ -23,22 +22,11 @@ class CreateUserService {
     private hashProvider: IHashProvider,
   ) {}
 
-  public async execute({
-    name,
-    email,
-    password,
-    passwordConfirmation,
-  }: IRequest): Promise<User> {
+  public async execute({ name, email, password }: IRequest): Promise<User> {
     const checkUserExists = await this.usersRepository.findByEmail(email);
 
     if (checkUserExists) {
       throw new AppError('E-mail address already used.');
-    }
-
-    const checkIfSamePassword = password === passwordConfirmation;
-
-    if (!checkIfSamePassword) {
-      throw new AppError('Password does not match.');
     }
 
     const hashedPassword = await this.hashProvider.generateHash(password);

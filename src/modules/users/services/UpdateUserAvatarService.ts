@@ -2,8 +2,8 @@ import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/error/AppError';
 
-import User from '@modules/users/infra/typeorm/entities/User';
 import IStorageProvider from '@shared/container/providers/StorageProvider/models/IStorageProvider';
+import User from '../infra/typeorm/entities/User';
 import IUsersRepository from '../repositories/IUsersRepository';
 
 interface IRequest {
