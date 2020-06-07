@@ -6,14 +6,14 @@ import ISendMailDTO from '../dtos/ISendMailDTO';
 import IMailTemplateProvider from '../../MailTemplateProvider/models/IMailTemplateProvider';
 
 @injectable()
-class EtherealMailProvider implements IMailProvider {
+class MailTrapMailProvider implements IMailProvider {
   private client: Transporter;
 
   constructor(
     @inject('MailTemplateProvider')
     private mailTemplateProvider: IMailTemplateProvider,
   ) {
-    const transporter = nodemailer.createTransport({
+    this.client = nodemailer.createTransport({
       host: 'smtp.mailtrap.io',
       port: 2525,
       auth: {
@@ -21,8 +21,6 @@ class EtherealMailProvider implements IMailProvider {
         pass: 'e0d3c5af8208ad',
       },
     });
-
-    this.client = transporter;
   }
 
   public async sendMail({
@@ -46,4 +44,4 @@ class EtherealMailProvider implements IMailProvider {
   }
 }
 
-export default EtherealMailProvider;
+export default MailTrapMailProvider;

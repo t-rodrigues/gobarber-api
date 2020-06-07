@@ -14,7 +14,7 @@ class EtherealMailProvider implements IMailProvider {
     private mailTemplateProvider: IMailTemplateProvider,
   ) {
     nodemailer.createTestAccount().then(account => {
-      const transporter = nodemailer.createTransport({
+      this.client = nodemailer.createTransport({
         host: account.smtp.host,
         port: account.smtp.port,
         secure: account.smtp.secure,
@@ -23,8 +23,6 @@ class EtherealMailProvider implements IMailProvider {
           pass: account.pass,
         },
       });
-
-      this.client = transporter;
     });
   }
 
@@ -36,8 +34,8 @@ class EtherealMailProvider implements IMailProvider {
   }: ISendMailDTO): Promise<void> {
     const message = await this.client.sendMail({
       from: {
-        name: from?.name || 'Equipe GoBarber',
-        address: from?.email || 'equaipe@gobarber.com.br',
+        name: from?.name || 'Equipe Gobarber',
+        address: from?.email || 'equipe@gobarber.com.br',
       },
       to: {
         name: to.name,
