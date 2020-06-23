@@ -35,7 +35,7 @@ class ListProvidersService {
       );
     }
 
-    return providers;
+    return classToClass(providers);
   }
 }
 

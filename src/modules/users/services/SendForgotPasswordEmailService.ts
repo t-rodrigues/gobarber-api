@@ -52,7 +52,7 @@ class SendForgotPasswordEmailService {
           name: user.name,
           token,
           from: 'Equipe GoBarber',
-          link: `${process.env.APP_WEB_URL}/password/reset?token=${token}`,
+          link: `${process.env.APP_WEB_URL}/reset-password?token=${token}`,
         },
       },
     });

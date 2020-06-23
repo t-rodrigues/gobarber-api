@@ -20,7 +20,7 @@ usersRoute.post(
     [Segments.BODY]: {
       name: Joi.string().required(),
       email: Joi.string().email().required(),
-      passowrd: Joi.string().min(6).required(),
+      password: Joi.string().min(6).required(),
       password_confirmation: Joi.valid(Joi.ref('password')),
     },
   }),
